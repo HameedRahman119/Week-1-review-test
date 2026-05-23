@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node{
+    int ID;
+    char Name[20];
+    char Status[20];
+    struct node *next;
+    };
+struct node *head=NULL,*temp=NULL;
+
+void add(int id,char name[],char st[]){
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	newnode->ID=id;               
+        strcpy(newnode->Name,name);
+        strcpy(newnode->Status,st);
+        newnode->next=head;
+       head=newnode;
+           }
+void update(int id,char st[]){
+         temp=head;
+         while(temp->ID!=id&&temp!=NULL)
+         temp=temp->next;
+         strcpy(temp->Status,st);
+         }
+void display(){
+  temp=head;
+  while(temp!=NULL){
+        printf("Patient ID:%d\n",temp->ID);
+        printf("Patient Name:%s\n",temp->Name);
+        printf("Patient status:%s\n\n",temp->Status);
+        temp=temp->next;
+        }
+        printf("---------------------------------\n");
+        }
+int main(){
+   int ch;
+  do{
+    printf("1.Add patient\n2.Update patient\n 3.Display\n 4.exit\n Select one from options by number\nEnter the Option:);
+    scanf("%d",&ch);
+    switch(ch){
+      int num,nam[20],st[20]
+     case 1:
+          printf("\nEnter Unique ID:");
+          scanf("%d",&num);
+          printf("Enter Name:");
+          scanf("%s ",nam);
+          printf("Enter Status either Waiting or Under_treatment or Discharge:");
+          scanf("%s",st);
+          add(num,nam,st);
+          
+    
+    
+    
+    
+    /*
+   add(119,"HR","waiting");
+   add(120,"VR","undertreatment");  
+   display();
+   update(119,"undertreatment");
+   update(120,"Discharge");
+   display();*/
+   }
+           
+           
+        
