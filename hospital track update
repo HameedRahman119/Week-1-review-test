@@ -1,0 +1,124 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct node
+{
+    int ID;
+    char Name[20];
+    char Status[20];
+    struct node *next;
+};
+
+struct node *head=NULL,*temp=NULL;
+
+void add(int id,char name[],char st[])
+{
+    temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->ID==id)
+        {
+            printf("ID already exists\n");
+            return;
+        }
+
+        temp=temp->next;
+    }
+
+    struct node* newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->ID=id;
+    strcpy(newnode->Name,name);
+    strcpy(newnode->Status,st);
+    newnode->next=head;
+    head=newnode;
+}
+
+void update(int id,char st[])
+{
+    temp=head;
+    while(temp!=NULL && temp->ID!=id)
+    {
+        temp=temp->next;
+    }
+    if(temp!=NULL)
+    {
+        strcpy(temp->Status,st);
+    }
+    else
+    {
+        printf("Patient not found\n");
+    }
+}
+
+void display()
+{
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("Patient ID:%d\n",temp->ID);
+        printf("Patient Name:%s\n",temp->Name);
+        printf("Patient status:%s\n\n",temp->Status);
+        temp=temp->next;
+    }
+    printf("---------------------------------\n");
+}
+
+void freeList()
+{
+    struct node *current;
+    while(head!=NULL)
+    {
+        current=head;
+        head=head->next;
+        free(current);
+    }
+}
+
+int main()
+{
+    int ch;
+    char c;
+    do
+    {
+        printf("1.Add patient\n2.Update patient\n3.Display\n4.exit\n");
+        printf("--Select one from options by number--\n");
+        printf("Enter the Option:");
+        scanf("%d",&ch);
+        int num;
+        char nam[20],st[20];
+        switch(ch)
+        {
+            case 1:
+                printf("\nEnter Unique ID:");
+                scanf("%d",&num);
+                printf("Enter Name:");
+                scanf("%s",nam);
+                printf("Enter Status (Waiting/Under_treatment/Discharge):");
+                scanf("%s",st);
+                add(num,nam,st);
+                break;
+            case 2:
+                printf("\nEnter Unique ID:");
+                scanf("%d",&num);
+                printf("Update Status (Waiting/Under_treatment/Discharge):");
+                scanf("%s",st);
+                update(num,st);
+                break;
+            case 3:
+                printf("---Patients Track Display---\n");
+                display();
+                break;
+            case 4:
+                freeList();
+                return 0;
+        }
+        printf("Do you want to continue?(Y/N):");
+        scanf(" %c",&c);
+    }while(c=='Y' || c=='y');
+    freeList();
+    return 0;
+}
+           
+           
+        
