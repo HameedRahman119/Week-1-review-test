@@ -12,10 +12,10 @@ int main(){
    if(n<0){
    printf("Negative number are invalid\n");
    return 0;}
-   
-   int r= fact(n);
-   printf("Fact:%d\n",r);
-   if((r%10!=0&&n>10)||r<=0)
+   if(n<13)       //For 32bit integer
+   {int r= fact(n);
+   printf("Fact:%d\n",r);}
+   else
    printf("Overflow happened\n");
    
    return 0;
